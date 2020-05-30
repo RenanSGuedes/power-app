@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/0de72deb11.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+  <title>Power App</title>
+</head>
+<body>
+  <aside class="font-size">
+
+  </aside>
+  <div class="container">
+    <div class="left">
+      <img src="images/hero.png" alt="hero" class="hero">
+      <article>
+        <i class="fas fa-quote-right fa-4x" id="quote"></i>
+        <h2>Nosso projeto <i class="em em-bulb" aria-role="presentation" aria-label="ELECTRIC LIGHT BULB"></i></h2>
+        <h3 class="details">Atualmente no Brasil diversas pessoas enfrentam problemas de classe energética devido à constante desigualdade na distribuição de recursos e, na maioria dos casos por serem vítimas da marginalização.</h3>
+        <h4>Faça parte disso! Seu relato nos ajuda a saber das maiores dificuldades na sua região.</h4>
+        <input type="button" value="Quero Contribuir" class="help">
+        <form action="/users" method="post" class="form">
+          <input type="text" class="username" name="username" id="username" placeholder="Nome do usuário (Ex: Renan Guedes)"/>
+          <textarea name="report" id="" cols="30" rows="10" name="report" placeholder="Escreva seu relato"></textarea>
+          <button type="submit" id="submit">Enviar <i class="fas fa-arrow-alt-circle-right"></i></button>
+        </form>
+      </article>
+    </div>
+    <div class="right">
+      <h1>Reports <i class="em em-bookmark_tabs" aria-role="presentation" aria-label="BOOKMARK TABS"></i></h1>
+      <div class="cards">
+        {% for user in users %}
+        <div class="card">
+          <div class="user-info">
+            <div class="name-city">
+              <h3>{{ user.username }}</h3>
+              <h3 class="user_city">{{ user.user_city }}, {{ user.user_state }}</h3>
+            </div>
+            <div class="gender">
+              
+            </div>
+          </div>
+          <div class="report">
+            <strong>Relato</strong>
+            <p class="user_report">{{ user.report }}</p>
+          </div>
+          <button class="resize">Hello</button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
