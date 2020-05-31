@@ -6,6 +6,12 @@
   <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/0de72deb11.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="styles.css">
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="utils/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="utils/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="utils/favicon-16x16.png">
+  <link rel="manifest" href="utils/site.webmanifest">
+
   <title>Power App</title>
 </head>
 <body>
@@ -14,18 +20,48 @@
   </aside>
   <div class="container">
     <div class="left">
-      <img src="images/hero.png" alt="hero" class="hero">
       <article>
+        <i class="fas fa-lightbulb fa-8x" id="bulb"></i>
         <i class="fas fa-quote-right fa-4x" id="quote"></i>
-        <h2>Nosso projeto <i class="em em-bulb" aria-role="presentation" aria-label="ELECTRIC LIGHT BULB"></i></h2>
+        <h2>Nosso projeto</h2>
         <h3 class="details">Atualmente no Brasil diversas pessoas enfrentam problemas de classe energética devido à constante desigualdade na distribuição de recursos e, na maioria dos casos por serem vítimas da marginalização.</h3>
-        <h4>Faça parte disso! Seu relato nos ajuda a saber das maiores dificuldades na sua região.</h4>
-        <input type="button" value="Quero Contribuir" class="help">
-        <form action="/users" method="post" class="form">
-          <input type="text" class="username" name="username" id="username" placeholder="Nome do usuário (Ex: Renan Guedes)"/>
-          <textarea name="report" id="" cols="30" rows="10" name="report" placeholder="Escreva seu relato"></textarea>
-          <button type="submit" id="submit">Enviar <i class="fas fa-arrow-alt-circle-right"></i></button>
+        <h4 class="invite">Faça parte disso! Seu relato nos ajuda a saber das maiores dificuldades na sua região.</h4>
+        <input 
+          type="button" 
+          value="Quero Contribuir" 
+          class="help"/>
+
+        <form action="/users" method="post" class="form hide">
+          <input 
+            type="text" 
+            class="username" 
+            name="username" 
+            id="username" 
+            placeholder="Nome do usuário (Ex: Renan Guedes)"/>
+          <input 
+            type="text" 
+            class="mail" 
+            name="mail" 
+            placeholder="(Ex: lightradar@hotmail.com)">
+          <input 
+            type="text" 
+            class="cep" 
+            name="cep" 
+            maxlength="8" 
+            placeholder="CEP (Sem traços ou espaços)">
+          <textarea 
+            name="report" 
+            cols="30" 
+            rows="10" 
+            name="report" 
+            placeholder="Escreva seu relato"></textarea>
+          <button 
+            type="submit" 
+            id="submit">Enviar<i class="fas fa-arrow-alt-circle-right"></i>
+          </button>
         </form>
+        
+        <img src="images/hero.png" alt="hero" class="hero hide">
       </article>
     </div>
     <div class="right">
@@ -37,6 +73,8 @@
             <div class="name-city">
               <h3>{{ user.username }}</h3>
               <h3 class="user_city">{{ user.user_city }}, {{ user.user_state }}</h3>
+              <h4 class="street">{{ user.first_name }} contribiu de um local próximo à</h4>
+              <h4 class="district">{{ user.street }}, {{ user.district }}!!</h4>
             </div>
             <div class="gender">
               
@@ -46,13 +84,15 @@
             <strong>Relato</strong>
             <p class="user_report">{{ user.report }}</p>
           </div>
-          <button class="resize">Hello</button>
+          <a 
+            href="mailto:{{ user.mail }}?
+            &subject=App LightRadar 😎 
+            &body=Olá, {{ user.first_name }}">Enviar mensagem</a>
         </div>
         {% endfor %}
       </div>
     </div>
   </div>
-
   <script src="scripts.js"></script>
 </body>
 </html>

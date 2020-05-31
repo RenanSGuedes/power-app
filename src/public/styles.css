@@ -32,7 +32,6 @@ html, body {
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-wrap: wrap;
 }
 
 .left, .right {
@@ -49,10 +48,32 @@ html, body {
   justify-content: space-around;
 }
 
+img.hero.hide  {
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
 img.hero {
-  z-index: 1;
-  width: 250px;
-  margin-right: -160px;
+  transition: opacity 500ms ease;
+  opacity: 1;
+  position: absolute;
+  bottom: 0;
+  width: 200px;
+  left: -100px;
+  animation: heroAction 5s infinite;
+}
+
+@keyframes heroAction {
+  0% {
+    width: 200px;
+  }
+  50% {
+    width: 210px;
+    bottom: 30px;
+  }
+  100% {
+    width: 200px;
+  }
 }
 
 article {
@@ -63,6 +84,20 @@ article {
   background-color: wheat;
   padding: 30px 10px;
   border-radius: 40px;
+}
+
+#bulb {
+  margin-top: -65px;
+}
+
+.fas.fa-lightbulb {
+  color: black;
+  transition: color 300ms;
+}
+
+.fas.fa-lightbulb.hide {
+  color: rgb(255, 253, 154);
+  text-shadow: 30px 30px 50px yellow;
 }
 
 i#quote {
@@ -122,8 +157,17 @@ textarea::placeholder, input[type=text]::placeholder {
   font-size: 11pt;
 }
 
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 5px;
+  padding: 3px;
+  font-size: 20pt;
+}
+
 .container .right {
-  background-color: rgb(255, 227, 69);
+  background-color: rgb(255, 213, 134);
   padding: 0 40px 0 40px;
 }
 
@@ -141,7 +185,6 @@ textarea::placeholder, input[type=text]::placeholder {
 .user-info {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
 }
 
 .gender {
@@ -157,6 +200,15 @@ strong {
 
 .user_city {
   color: rgba(0, 0, 0, .5);
+}
+
+.street ,.district {
+  font-weight: bold;
+  color: #7159c1;
+}
+
+.district {
+  margin-top: -12px;
 }
 
 .user_report {
@@ -175,4 +227,32 @@ button:hover, input[type=button]:hover {
   align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+@media (max-width: 1250px) {
+  .container {
+    flex-direction: column;
+  }
+  .left, .right {
+    width: 100%;
+  }
+  .right {
+    height: auto;
+    min-height: 150%;
+  }
+}
+
+@media (max-width: 800px) {
+  article {
+    width: 90%;
+  }
+  .cards {
+    justify-content: space-around;
+  }
+  .right .card {
+    width: 80%;
+  }
+  .right {
+    min-height: auto;
+  }
 }

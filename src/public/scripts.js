@@ -19,3 +19,14 @@ document.querySelector('.help').addEventListener('click', function() {
     .querySelector('.form')
       .classList.toggle('hide')
 })
+
+document.querySelector('.help').addEventListener('click', function() {
+  document
+    .querySelector('.fas.fa-lightbulb')
+      .classList.toggle('hide')
+
+  document
+    .querySelector('.hero')
+      .classList.toggle('hide')
+})
+

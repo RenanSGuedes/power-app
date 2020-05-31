@@ -6,7 +6,7 @@ module.exports = {
   async index(req, res, next) {
     try {
       const people = await knex('users')
-  
+
       const data = {
         titlePage: 'Objetivos do Desenvolvimento Sustentável - 7',
         users: people
@@ -19,22 +19,33 @@ module.exports = {
     }
   },
   async create(req, res, next) {
-    const { username, report } = req.body
-    const apiResponse = await axios.get('https://ipapi.co/json/')
-  
-    const { city, region_code, latitude, longitude } = apiResponse.data
-  
+    const { username, mail ,cep, report } = req.body
+    const geolocationResponse = await axios.get('https://ipapi.co/json/')
+    const adressResponse = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+    
+
+    const { latitude, longitude } = geolocationResponse.data
+    const { logradouro, bairro, localidade, uf } = adressResponse.data
+
+    function parseUserFirstName(string) {
+      return string.split(' ').map(w => w.trim()).shift()
+    }
+
     try {
       await knex('users').insert({
         username,
-        user_city: city,
-        user_state: region_code,
+        mail,
+        first_name: parseUserFirstName(username),
+        user_city: localidade,
+        user_state: uf,
         latitude,
         longitude,
+        street: logradouro,
+        district: bairro,
         report
       })
-  
-      res.status(202).send()
+
+      return res.status(202).send()
     } catch (error) {
       next(error)
     }
